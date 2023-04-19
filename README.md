@@ -18,3 +18,8 @@
     Or
 
         yarn start
+
+*  Login
+
+        user@gmail.com
+        test1234

@@ -9,7 +9,8 @@ import {
   Box,
   TextField,
   InputAdornment,
-  IconButton
+  IconButton,
+  FormControl
 } from "@mui/material";
 import {
   AccountCircle,
@@ -35,15 +36,54 @@ const style = {
 };
 
 const Navbar = () => {
-  const isAuth = false;
-  const [open, setOpen] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
+  const [isAuth, setIsAuth] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const handleLoginOpen = () => setLoginOpen(true);
+  const handleLoginClose = () => setLoginOpen(false);
+  const handleClickShowLoginPassword = () => setShowLoginPassword((show) => !show);
+  const handleMouseDownLoginPassword = (event) => {
     event.preventDefault();
   };
+
+  const [signupOpen, setSignupOpen] = useState(false);
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const handleSignupOpen = () => setSignupOpen(true);
+  const handleSignupClose = () => setSignupOpen(false);
+  const handleClickShowSignupPassword = () => setShowSignupPassword((show) => !show);
+  const handleMouseDownSignupPassword = (event) => {
+    event.preventDefault();
+  };
+  const switchFromSignupToLogin = event => {
+    handleSignupClose();
+    handleLoginOpen();
+  }
+  const switchFromLoginToSignup = event => {
+    handleLoginClose();
+    handleSignupOpen();
+  }
+  const handleLogin = event => {
+    event.preventDefault();
+    let email = document.querySelector('#login-email').value;
+    let password = document.querySelector('#login-password').value;
+    if(email === '' || password === ''){
+      setLoginError('Email and Password cannot be left Blank');
+    }
+    else if (email === 'user@gmail.com'){
+      if(password === 'test1234'){
+        setIsAuth(true);
+        setLoginError('');
+        handleLoginClose('');
+      } else {
+        setLoginError('Incorrect Password');
+      }
+    } else {
+      setLoginError('Account Not Found')
+    }
+  }
+
+  const [students, setStudents] = useState([]);
 
   return (
     <Box>
@@ -76,9 +116,14 @@ const Navbar = () => {
                   <Avatar sx={{ width: 50, height: 50 }}>{"ML"}</Avatar>
                 </Stack>
               ) : (
-                <Button variant="outline" href="#" onClick={handleOpen}>
+                <Stack direction='row'>
+                  <Button variant="outline" href="#" onClick={handleLoginOpen}>
                   Login
                 </Button>
+                <Button variant="outline" href="#" onClick={handleSignupOpen}>
+                  Create Account
+                </Button>
+                </Stack>
               )}
             </Stack>
           </Stack>
@@ -86,19 +131,22 @@ const Navbar = () => {
       </AppBar>
 
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={loginOpen}
+        onClose={handleLoginClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Stack spacing="20px">
             <Typography variant="h5" align="center">Log Into Account</Typography>
-            <TextField 
+            <FormControl>
+                <Stack spacing='20px'>
+                <TextField 
               required
               id="login-email" 
               label="Enter Email" 
               variant="standard"
+              type='email'
               margin="normal"
               InputProps={{
                 startAdornment: (
@@ -114,16 +162,16 @@ const Navbar = () => {
               id="login-password"
               label="Enter Password"
               variant="standard"
-              type={showPassword ? 'text' : 'password'}
+              type={showLoginPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+                      onClick={handleClickShowLoginPassword}
+                      onMouseDown={handleMouseDownLoginPassword}
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showLoginPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -136,10 +184,93 @@ const Navbar = () => {
             />
             <Box>
               <Typography><a href="#" style={{color: "#2196f3"}}>Forgotten password?</a></Typography></Box>
-            <Button variant='contained'>Log In</Button>
+            <Button variant='contained' onClick={handleLogin} type='submit'>Log In</Button>
+                </Stack>
+            
+            </FormControl>
+             <Box> <Typography align="center">
+                <a href="#" style={{color: "#2196f3"}} onClick={switchFromLoginToSignup}>Create New Account Instead</a>
+              </Typography>
+            </Box>
+            <Box> <Typography align="center" color='error'>
+                { loginError }
+              </Typography>
+            </Box>
+          </Stack>
+        </Box>
+      </Modal>
+
+      <Modal
+        open={signupOpen}
+        onClose={handleSignupClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Stack spacing="20px">
+            <Typography variant="h5" align="center">Create New Account</Typography>
+            <TextField 
+              required
+              id="fname-email" 
+              label="Enter First Name"
+              type='text' 
+              variant="standard"
+              margin="normal"
+            />
+            <TextField 
+              required
+              id="signup-email" 
+              label="Enter Second Name"
+              type='text' 
+              variant="standard"
+              margin="normal"
+            />
+
+            <TextField 
+              required
+              id="signup-email" 
+              label="Enter Email"
+              type='email' 
+              variant="standard"
+              margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }} 
+            />
+
+            <TextField 
+              required
+              id="signup-password"
+              label="Enter Password"
+              variant="standard"
+              type={showSignupPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowSignupPassword}
+                      onMouseDown={handleMouseDownSignupPassword}
+                    >
+                      {showSignupPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+                startAdornment: (
+                  <InputAdornment position="start">
+                    
+                  </InputAdornment>
+                ),
+              }} 
+            />
+            <Button variant='contained'>Create Account</Button>
             <Box>
               <Typography align="center">
-                <a href="#" style={{color: "#2196f3"}}>Create New Account Instead</a>
+                <a href="#" style={{color: "#2196f3"}} onClick={switchFromSignupToLogin}>Login Instead</a>
               </Typography>
             </Box>
           </Stack>
