@@ -18,7 +18,6 @@ function HomePage() {
 
   return (
     <Stack className="page">
-      <Navbar />
       <Box
         sx={{
           backgroundImage: `url(${blackStudents})`,

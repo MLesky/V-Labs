@@ -20,6 +20,7 @@ import {
 import Logo from "../../assets/logo/logo";
 import title from "../../assets/title";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 
 const style = {
   position: "fixed",
@@ -102,9 +103,11 @@ const Navbar = () => {
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
-              <Button variant="outline" href="#">
-                Simulations
-              </Button>
+              <Link to={"/simulations"}>
+                <Button variant="outline" href="#">
+                  Simulations
+                </Button>
+              </Link>
               <Button variant="outline" href="#">
                 Teachings
               </Button>
