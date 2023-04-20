@@ -27,12 +27,18 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function CardI({ image, title, description }) {
+  var colors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown'];
+
+  function getRandomColor() {
+    var randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  }
 
   return (
     <Card sx={{ maxWidth: 300 }}>
       <CardHeader
         avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: getRandomColor() }} aria-label="recipe">
               {title[0]}
             </Avatar>
           }

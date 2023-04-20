@@ -27,7 +27,7 @@ const Simulations = () => {
                             description={"We offer a larger repertoire of physics experiments at secondary and high school"}
                         />
                     </Link>
-                    <Link to={"/simulations/physics"} style={{
+                    <Link to={"/simulations/chemistry"} style={{
                         textDecoration: "none"
                     }}>
                         <CardI 
