@@ -6,6 +6,7 @@ import Navbar from './templates/headers/navbar';
 
 import Physics from './pages/Physics';
 import Chemistry from './pages/Chemistry';
+import Experiment from './pages/Experiment';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/simulations' element={<Simulations />} />
           <Route path='/simulations/physics' element={<Physics />} />
           <Route path='/simulations/chemistry' element={<Chemistry />} />
+          <Route path='/experiment' element={<Experiment />} />
         </Routes>
       </Router>
     </div>

@@ -1,14 +1,31 @@
-import React from "react"
+import * as React from 'react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const ExpCard = ({image, name}) => {
-    return(
-        <div>
-            <div className='card'>
-                <img src={image} alt={name} width={50} loading='lazy' />
-                <p>{name}</p>
-            </div>
+import { IMAGES } from '../utils';
+
+export default function ExpCard({ image, url, title, description }) {
+  const navigate = useNavigate();
+
+  const toIframe=()=>{
+    navigate('/experiment', {state:{url:url}});
+  }
+
+  return (
+    <>
+        <div className="card">
+            <img src={ image } alt={"Nicely"} />
+            <a
+                onClick={()=>{toIframe()}}
+                style={{
+                  textTransform: "uppercase",
+                  cursor: "pointer"
+                }}
+            >
+                <h3>{ title }</h3>
+            </a>
+            <p>{ description }</p>
         </div>
-    )
+    </>
+  );
 }
-
-export default ExpCard
