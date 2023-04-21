@@ -36,16 +36,26 @@ const Simulations = () => {
                             description={"We offer a larger repertoire of Chemistry experiments at secondary and high school"}
                         />
                     </Link>
-                    <CardI 
+                    <Link to={"/simulations/biology"} style={{
+                        textDecoration: "none"
+                    }}>
+                        <CardI 
                         image={IMAGES.biology}
                         title={"Biology"}
                         description={"We offer a larger repertoire of Biology experiments at secondary and high school"}
                     />
-                    <CardI 
+                    </Link>
+
+                    <Link to={"/simulations/maths"} style={{
+                        textDecoration: "none"
+                    }}>
+                        <CardI 
                         image={IMAGES.math}
                         title={"Math"}
                         description={"We offer a larger repertoire of Math experiments at secondary and high school"}
                     />
+                    </Link>
+                    
                 </div>
             </div>
         </div>
