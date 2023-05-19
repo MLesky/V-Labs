@@ -8,6 +8,7 @@ import Chemistry from './pages/Chemistry';
 import Biology from './pages/Biology';
 import Experiment from './pages/Experiment';
 import Maths from './pages/Maths';
+import ProfilePage from './pages/Profile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<HomePage />} />
           
           <Route path='/simulations' element={<Simulations />} />
+          <Route path='/profile' element={<ProfilePage />} />
           <Route path='/simulations/physics' element={<Physics />} />
           <Route path='/simulations/chemistry' element={<Chemistry />} />
           <Route path='/simulations/Biology' element={<Biology />} />

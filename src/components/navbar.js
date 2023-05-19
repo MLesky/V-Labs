@@ -103,7 +103,12 @@ const Navbar = () => {
               </Typography>
             </Stack>
             <Stack direction="row" alignItems="center">
-              <Link to={"/simulations"}>
+              <Link 
+                to={"/simulations"}
+                style={{
+                  color: "#FFF"
+                }}
+              >
                 <Button variant="outline" href="#">
                   Simulations
                 </Button>
