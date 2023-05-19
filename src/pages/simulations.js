@@ -4,16 +4,17 @@ import CardI from '../components/Card'
 import { Link } from 'react-router-dom';
 
 import { IMAGES } from '../utils';
+import { Box } from '@mui/material';
 
 const Simulations = () => {
 
     return(
         <div>
             <div>
-                <div style={
+                <Box sx={
                     {  
                         display:"flex", 
-                        flexDirection:"row",
+                        flexWrap: 'wrap',
                         justifyContent: "space-around",
                         alignItems: "center",
                         marginTop: "5em"
@@ -56,7 +57,7 @@ const Simulations = () => {
                     />
                     </Link>
                     
-                </div>
+                </Box>
             </div>
         </div>
     )
