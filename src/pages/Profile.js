@@ -17,6 +17,8 @@ import {
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
 import Chart from 'react-apexcharts';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
 
 export default function ProfilePage() {
     const series = [70]; //70 percent
@@ -177,6 +179,24 @@ export default function ProfilePage() {
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={66} valuemin={0} valuemax={100} />
                     </MDBProgress>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+            <MDBCol md="12" className='my-5'>
+                <MDBCard className="mb-4 mb-md-0">
+                  <MDBCardBody>
+                    <MDBCardText className="mb-4 h1">Trend</MDBCardText>
+                    <CalendarHeatmap
+                        startDate={new Date('2016-01-01')}
+                        endDate={new Date('2016-04-01')}
+                        values={[
+                            { date: '2016-01-01', count: 12 },
+                            { date: '2016-01-22', count: 122 },
+                            { date: '2016-01-30', count: 38 },
+                        ]}
+                    />
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
