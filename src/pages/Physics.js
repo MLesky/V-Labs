@@ -1,10 +1,7 @@
 import * as React from 'react';
-import ExpCard from '../components/ExpCard';
-import Card from '../components/Card';
+import { ExpCard, CardI, SideBar } from '../components';
 import { IMAGES } from '../utils';
-import { Stack } from "@mui/material";
-import SideBar from '../templates/headers/sidebar';
-
+import { Stack } from '@mui/material';
 export default function CheckboxListSecondary() {
 
   const experiments = [
@@ -38,7 +35,7 @@ export default function CheckboxListSecondary() {
             description = {"Math lab for graphing"}
         />
 
-        {experiments.map((exp) => <Card image={IMAGES.physics} title={exp.title} description={exp.description}/>)}
+        {experiments.map((exp) => <CardI image={IMAGES.physics} title={exp.title} description={exp.description}/>)}
     </div>
   </Stack>
   );

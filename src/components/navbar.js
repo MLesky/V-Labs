@@ -17,8 +17,8 @@ import {
   VisibilityOff,
   Visibility
 } from "@mui/icons-material"
-import Logo from "../../assets/logo/logo";
-import title from "../../assets/title";
+import Logo from "../assets/logo/logo";
+import title from "../assets/title";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
 
@@ -37,7 +37,7 @@ const style = {
 };
 
 const Navbar = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const [loginError, setLoginError] = useState('');
   const [loginOpen, setLoginOpen] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);

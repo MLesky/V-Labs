@@ -1,9 +1,7 @@
-import React from "react";
-import ExpCard from '../components/ExpCard';
-import Card from '../components/Card';
+import * as React from 'react';
+import { ExpCard, CardI, SideBar } from '../components';
 import { IMAGES } from '../utils';
-import { Stack } from "@mui/material";
-import SideBar from "../templates/headers/sidebar";
+import { Stack } from '@mui/material';
 
 const Chemistry = () => {
 
@@ -38,7 +36,7 @@ const Chemistry = () => {
             description = {"Convert a material from one state to another"}
         />
 
-        {experiments.map((exp) => <Card image={IMAGES.chemistry} title={exp.title} description={exp.description}/>)}
+        {experiments.map((exp) => <CardI image={IMAGES.chemistry} title={exp.title} description={exp.description}/>)}
     </div>
       </Stack>  
        

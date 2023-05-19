@@ -1,5 +1,5 @@
 import { Typography, Box } from "@mui/material";
-import Title from "../../assets/title";
+import Title from "../assets/title";
 
 const Footer = () => {
     return ( 

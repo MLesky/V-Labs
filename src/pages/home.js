@@ -1,8 +1,7 @@
-import Navbar from "../templates/headers/navbar";
 import { Stack, Box, Typography, Button } from "@mui/material";
 import scienceExp from "../assets/images/undraw_science_re_mnnr.svg";
 import scienceLab from "../assets/images/medical-laboratory.jpg";
-import Footer from "../templates/footers/footer";
+import { Footer } from "../components";
 import blackStudents from "../assets/images/study-group-african-people.jpg";
 
 function HomePage() {

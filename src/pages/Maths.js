@@ -1,10 +1,7 @@
-import React from "react";
-import ExpCard from '../components/ExpCard';
-import Card from '../components/Card';
+import * as React from 'react';
+import { ExpCard, CardI, SideBar } from '../components';
 import { IMAGES } from '../utils';
-import { Stack } from "@mui/material";
-import SideBar from "../templates/headers/sidebar";
-
+import { Stack } from '@mui/material';
 const Maths = () => {
 
     const experiments = [

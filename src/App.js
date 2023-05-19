@@ -2,8 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
 import HomePage from './pages/home'
 import Simulations from './pages/simulations'
-import Navbar from './templates/headers/navbar';
-
+import { Navbar } from './components';
 import Physics from './pages/Physics';
 import Chemistry from './pages/Chemistry';
 import Biology from './pages/Biology';
