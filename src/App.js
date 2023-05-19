@@ -9,10 +9,13 @@ import Biology from './pages/Biology';
 import Experiment from './pages/Experiment';
 import Maths from './pages/Maths';
 import ProfilePage from './pages/Profile';
+import { ThemeProvider } from '@mui/material';
+import theme from './utils/theme';
 
 function App() {
   return (
     <div className="App">
+      <ThemeProvider theme={theme}>
       <Router>
         <Navbar />
         <Routes>
@@ -27,6 +30,7 @@ function App() {
           <Route path='/experiment' element={<Experiment />} />
         </Routes>
       </Router>
+      </ThemeProvider>
     </div>
   );
 }
