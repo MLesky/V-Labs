@@ -18,6 +18,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebaseConfig/firebase"
+
 
 const CreateNewAccountModal = ({
   openModal,
@@ -25,12 +28,40 @@ const CreateNewAccountModal = ({
   switchToLogin,
   setIsAuth,
 }) => {
+  const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   // Form Submition
-  const handleFormSubmit = () => {
-    alert("Submitted");
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    const firstName = document.querySelector("#first-name").value;
+    const lastName = document.querySelector("#last-name").value;
+    const academicLevel = document.querySelector("#academic-level").value;
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log("User created:", user.uid);
+      setIsAuth(true);
+      onCloseModal();
+    } catch (error) {
+      console.error(error);
+      if (error.code === "auth/email-already-in-use") {
+        setRegisterError("Email is already in use");
+      } else if (error.code === "auth/weak-password") {
+        setRegisterError("Password is too weak");
+      } else {
+        setRegisterError("Registeration unsuccessful");
+      }
+    }
   };
 
   return (
@@ -59,10 +90,11 @@ const CreateNewAccountModal = ({
             variant="standard"
             margin="normal"
           />
+
           <TextField
             required
-            id="second-name"
-            label="Enter Second Name"
+            id="last-name"
+            label="Enter Last Name"
             type="text"
             variant="standard"
             margin="normal"
@@ -165,6 +197,11 @@ const CreateNewAccountModal = ({
               </a>
             </Typography>
           </Box>
+          {registerError && (
+            <Typography align="center" color="error">
+              {registerError}
+            </Typography>
+          )}
         </Stack>
       </Box>
     </Modal>
