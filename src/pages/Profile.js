@@ -154,7 +154,7 @@ export default function ProfilePage() {
               <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4">List of completed experiments</MDBCardText>
+                    <MDBCardText className="mb-4">Favorite Experiments</MDBCardText>
                     <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Lab 1</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={80} valuemin={0} valuemax={100} />
