@@ -35,7 +35,7 @@ export default function CardI({ image, title, description }) {
   }
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 300, marginTop: 5 }}>
       <CardHeader
         avatar={
             <Avatar sx={{ bgcolor: getRandomColor() }} aria-label="recipe">
