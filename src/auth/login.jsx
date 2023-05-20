@@ -11,6 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseConfig } from "../firebaseConfig/firebase"
 
 const LoginModal = ({ openModal, onCloseModal, switchToSignUp, setIsAuth }) => {
   const [loginError, setLoginError] = useState("");
@@ -19,24 +22,36 @@ const LoginModal = ({ openModal, onCloseModal, switchToSignUp, setIsAuth }) => {
 
   // Login In validation here
   // Authentication here
-  const handleLogin = (event) => {
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    let email = document.querySelector("#login-email").value;
-    let password = document.querySelector("#login-password").value;
-    if (email === "" || password === "") {
-      setLoginError("Email and Password cannot be left Blank");
-    } else if (email === "user@gmail.com") {
-      if (password === "test1234") {
+    const email = document.querySelector("#login-email").value;
+    const password = document.querySelector("#login-password").value;
+    
+    try {
+      if (email === "" || password === "") {
+        setLoginError("Email and Password cannot be left blank");
+      } else {
+        const auth = getAuth();
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
         setIsAuth(true);
         setLoginError("");
         onCloseModal();
-      } else {
-        setLoginError("Incorrect Password");
       }
-    } else {
-      setLoginError("Account Not Found");
+    } catch (error) {
+      const errorCode = error.code;
+      if (errorCode === "auth/wrong-password") {
+        setLoginError("Incorrect Password");
+      } else if (errorCode === "auth/user-not-found") {
+        setLoginError("Account Not Found");
+      } else {
+        setLoginError("An error occurred. Please try again.");
+      }
     }
   };
+
+  
 
   return (
     <Modal
