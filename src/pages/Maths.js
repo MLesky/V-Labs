@@ -5,8 +5,8 @@ import { Stack } from '@mui/material';
 const Maths = () => {
 
     const experiments = [
-        {image : '', title : 'Center and Variability', Description : 'Predict the effects of an outlier on both the mean and median', url : 'Predict the effects of an outlier on both the mean and median'},
-        {image : '', title : 'Probability', Description : '', url : ''},
+        {image : '', title : 'Center and Variability', description : 'Predict the effects of an outlier on both the mean and median', url : ''},
+        {image : '', title : 'Probability', description : '', url : ''},
       ]
 
     return(
