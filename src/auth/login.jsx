@@ -113,9 +113,15 @@ const LoginModal = ({ openModal, onCloseModal, switchToSignUp, setIsAuth }) => {
                   </a>
                 </Typography>
               </Box>
-              <Button variant="contained" onClick={handleLogin}>
+              <Stack direction="row" justifyContent="space-between">
+            <Button onClick={onCloseModal} variant="contained">
+              Cancel
+            </Button>
+            <Button variant="contained" onClick={handleLogin}>
                 Log In
               </Button>
+          </Stack>
+              
             </Stack>
           </FormControl>
           <Box>
