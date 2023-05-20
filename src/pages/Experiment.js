@@ -1,7 +1,6 @@
 import { useState, React } from "react";
 import { useLocation } from "react-router-dom";
 import { Stack, Button, IconButton, Box } from "@mui/material";
-
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 const Experiment = () => {
