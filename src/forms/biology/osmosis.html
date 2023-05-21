@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Biology Experiment</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+		}
+        #question-form {
+			background-color: #fff;
+			border-radius: 5px;
+			padding: 20px;
+		}
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		.form-group label {
+			font-weight: bold;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		.form-control {
+			border-radius: 5px;
+		}
+
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+			border-radius: 5px;
+		}
+
+		.btn-primary:hover {
+			background-color: #0062cc;
+			border-color: #005cbf;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="main" class="col-12 col-md-9">
+				<div id="osmosis">
+					<h2>Osmosis Experiment</h2>
+					<p>Here are the steps to perform the Osmosis Experiment:</p>
+					<ol>
+						<p>Materials:Two containers of equal size,Water,Salt,Potato,Knife,Rule.</p>
+                        <p>Procedures</p>
+						<li>Cut a potato into two equal halves.</li>
+						<li>Using a ruler, measure and mark the length of each potato half.</li>
+						<li>Label one container as "saltwater" and the other as "freshwater".</li>
+						<li>Fill the saltwater container with water and add a tablespoon of salt. Stir until the salt is dissolved.</li>
+                        <li>Fill the freshwater container with water only.</li>
+                        <li>Place one potato half in the saltwater container and the other potato half in the freshwater container.</li>
+                        <li>Leave the potato halves in the containers for about 30 minutes to 1 hour.</li>
+                        <li>After the time has passed, remove the potato halves from the containers and dry them with a paper towel.</li>
+                        <li>Measure and record the length of each potato half using the ruler.</li>
+                        <li>Compare the lengths of the potato halves. The potato half in the saltwater container should have shrunk in size, while the potato half in the freshwater container should have stayed the same or slightly increased in size.</li>
+					</ol>
+                    <div id="question-form" class="col-12 col-md-8">
+                        <h2> Test your knowledge-Answer These Questions</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">What is your name?</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">How old are you?</label>
+                                <input type="number" class="form-control" id="age" name="age" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">What is your gender?</label>
+                                <select class="form-control" id="gender" name="gender" required>
+                                    <option value="">Select your gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="education">What is your highest level of education?</label>
+                                <input type="text" class="form-control" id="education" name="education" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="interests">What are your interests related to this topic?</label>
+                                <textarea class="form-control" id="interests" name="interests" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="comments">Any additional comments or feedback?</label>
+                                <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
