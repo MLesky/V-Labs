@@ -3,15 +3,38 @@ import scienceExp from "../assets/images/undraw_science_re_mnnr.svg";
 import scienceLab from "../assets/images/medical-laboratory.jpg";
 import { Footer } from "../components";
 import blackStudents from "../assets/images/study-group-african-people.jpg";
+import { LoginModal, CreateNewAccountModal } from "../auth";
+import { Subjects } from "../utils";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
-  const subjects = [
-    { title: "Chemistry", image: "lens.jpg" },
-    { title: "Biology", image: "lens.jpg" },
-    { title: "Physics", image: "lens.jpg" },
-    { title: "Geology", image: "lens.jpg" },
-    { title: "Maths", image: "lens.jpg" },
-  ];
+
+  const [isAuth, setIsAuth] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const handleLoginOpen = () => setLoginOpen(true);
+  const handleLoginClose = () => setLoginOpen(false);
+
+  const [signupOpen, setSignupOpen] = useState(false);
+  const handleSignupOpen = () => setSignupOpen(true);
+  const handleSignupClose = () => setSignupOpen(false);
+
+  const [requestOpen, setRequestOpen] = useState(false);
+  const handleRequestOpen = () => setRequestOpen(true);
+  const handleRequestClose = () => setRequestOpen(false);
+
+  const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const handleNavDrawerOpen = () => setNavDrawerOpen(true);
+  const handleNavDrawerClose = () => setNavDrawerOpen(false);
+
+  const switchFromSignupToLogin = (event) => {
+    handleSignupClose();
+    handleLoginOpen();
+  };
+  const switchFromLoginToSignup = (event) => {
+    handleLoginClose();
+    handleSignupOpen();
+  };
 
   const imageDir = "../assets/images/";
 
@@ -138,6 +161,7 @@ function HomePage() {
               href="#"
               size="large"
               sx={{ borderWidth: "3px" }}
+              onClick={handleSignupOpen}
             >
               <Typography variant="h5">Register</Typography>
             </Button>
@@ -165,30 +189,32 @@ function HomePage() {
         }}
         borderColor="primary"
       >
-        {subjects.map((subject) => (
+        {Subjects.map((subject) => (
           <Button
             sx={{
               borderRadius: "50%",
             }}
           >
+            <Link to={subject.goto} style={{textDecoration: "none"}}>
             <Stack
               sx={{
                 height: "150px",
                 width: "150px",
                 borderRadius: "50%",
-                backgroundImage: `url(${scienceExp})`,
+                backgroundImage: `url(${subject.image})`,
                 backgroundBlendMode: "multiply",
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
                 backgroundSize: "cover",
                 margin: "20px",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Typography variant="h5" color="primary.dark">
-                {subject.title}
+              <Typography variant="h5" sx={{color: 'white'}}>
+                {subject.name}
               </Typography>
             </Stack>
+            </Link>
           </Button>
         ))}
       </Box>
@@ -255,6 +281,18 @@ function HomePage() {
         </Stack>
       </Box>
       <Footer />
+      <LoginModal
+        openModal={loginOpen}
+        onCloseModal={handleLoginClose}
+        setIsAuth={setIsAuth}
+        switchToSignUp={switchFromLoginToSignup}
+      />
+      <CreateNewAccountModal
+        openModal={signupOpen}
+        onCloseModal={handleSignupClose}
+        setIsAuth={setIsAuth}
+        switchToLogin={switchFromSignupToLogin}
+      />
     </Stack>
   );
 }

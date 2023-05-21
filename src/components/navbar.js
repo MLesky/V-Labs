@@ -118,7 +118,7 @@ const Navbar = () => {
                 </Button>
                 {isAuth ? (
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
-                    <Avatar sx={{ width: 50, height: 50 }}>{"ML"}</Avatar>
+                    <Avatar sx={{ width: 50, height: 50 }}>{"AN"}</Avatar>
                   </NavLink>
                 ) : (
                   <Stack direction="row" class="auth-btns">
