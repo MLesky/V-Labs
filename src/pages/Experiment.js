@@ -81,7 +81,7 @@ const Experiment = () => {
         </Box>
         {/* <iframe
           id="data-form"
-          src="https://docs.google.com/spreadsheets/d/1-ZvTzBwOvr5uXwEXT9yFibuFR8HBtnM358LcWhioOzc/edit#gid=0"
+          src={"../forms/mathematics/probability.html"}
           frameborder="0"
           width="100%"
           style={{ flexGrow: 1 }}
