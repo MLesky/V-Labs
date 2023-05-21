@@ -31,22 +31,22 @@ export default function ProfilePage() {
       subject: "Biology",
       experiments: [
         {
-          experiment: "One",
+          experiment: "Natural Selection: Basics",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Neuron",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Molecule Polarity",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Gene Expression",
           progress: getRandomNumber(),
         },
       ],
@@ -55,22 +55,22 @@ export default function ProfilePage() {
       subject: "Chemistry",
       experiments: [
         {
-          experiment: "One",
+          experiment: "Atomic Interactions: Basics",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Rutherford Scattering",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Molecule Polarity",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Coulombs Law",
           progress: getRandomNumber(),
         },
       ],
@@ -79,27 +79,22 @@ export default function ProfilePage() {
       subject: "Physics",
       experiments: [
         {
-          experiment: "One",
+          experiment: "Atomic Interactions: Basics",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Rutherford Scattering",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
+          experiment: "Molecule Polarity",
           progress: getRandomNumber(),
         },
 
         {
-          experiment: "One",
-          progress: getRandomNumber(),
-        },
-
-        {
-          experiment: "One",
+          experiment: "Coulombs Law",
           progress: getRandomNumber(),
         },
       ],
@@ -108,27 +103,22 @@ export default function ProfilePage() {
 
   const favourite = [
     {
-      experiment: "One",
+      experiment: "Natural Selection: Basics",
       progress: getRandomNumber(),
     },
 
     {
-      experiment: "One",
+      experiment: "Neuron",
       progress: getRandomNumber(),
     },
 
     {
-      experiment: "One",
+      experiment: "Atomic Interactions: Basics",
       progress: getRandomNumber(),
     },
 
     {
-      experiment: "One",
-      progress: getRandomNumber(),
-    },
-
-    {
-      experiment: "One",
+      experiment: "Rutherford Scattering",
       progress: getRandomNumber(),
     },
   ];
@@ -168,9 +158,8 @@ export default function ProfilePage() {
                 <p className="text-muted mb-1">Arrey Ndang</p>
                 <p className="text-muted mb-4">Advanced Level</p>
                 <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn outline className="ms-1">
-                    Log Out
-                  </MDBBtn>
+                  <MDBBtn>Follow</MDBBtn>
+                  <MDBBtn outline className="ms-1">Message</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -294,75 +283,25 @@ export default function ProfilePage() {
                     <MDBCardText className="mb-4">
                       Favorite Experiments
                     </MDBCardText>
-                    <MDBCardText
-                      className="mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 1
-                    </MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar
-                        width={getRandomNumber()}
-                        valuemin={0}
-                        valuemax={100}
-                      />
-                    </MDBProgress>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 2
-                    </MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar
-                        width={getRandomNumber()}
-                        valuemin={0}
-                        valuemax={100}
-                      />
-                    </MDBProgress>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 3
-                    </MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar
-                        width={getRandomNumber()}
-                        valuemin={0}
-                        valuemax={100}
-                      />
-                    </MDBProgress>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 4
-                    </MDBCardText>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 5
-                    </MDBCardText>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 4
-                    </MDBCardText>
-
-                    <MDBCardText
-                      className="mt-4 mb-1"
-                      style={{ fontSize: ".77rem" }}
-                    >
-                      Lab 5
-                    </MDBCardText>
+                    {favourite.map((experiment) => (
+                        <>
+                          <MDBCardText
+                            className="mb-1"
+                            style={{ fontSize: ".77rem" }}
+                          >
+                            {experiment.experiment}
+                          </MDBCardText>
+                          <MDBProgress className="rounded">
+                            <MDBProgressBar
+                              width={experiment.progress}
+                              valuemin={0}
+                              valuemax={100}
+                            >
+                              Accuracy: {experiment.progress}%
+                            </MDBProgressBar>
+                          </MDBProgress>
+                        </>
+                      ))}
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

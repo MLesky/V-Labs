@@ -3,11 +3,26 @@ import { useLocation } from "react-router-dom";
 import { Stack, Button, IconButton, Box } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
+import Spreadsheet from "react-spreadsheet";
+
 const Experiment = () => {
   const location = useLocation();
   const [smallFormWidth, setSmallFormWidth] = useState("0");
   const [largeFormWidth, setLargeFormWidth] = useState("0");
   const [isOpen, setIsOpen] = useState(false);
+
+  const [data, setData] = useState([
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  ]);
 
   const handleOpenForm = () => {
     if (isOpen) {
@@ -64,15 +79,16 @@ const Experiment = () => {
             <ArrowForwardIos />
           </IconButton>
         </Box>
-        <iframe
+        {/* <iframe
           id="data-form"
-          src="https://docs.google.com/spreadsheets/d/1-ZvTzBwOvr5uXwEXT9yFibuFR8HBtnM358LcWhioOzc/edit#gid=0"
+          src={"../forms/mathematics/probability.html"}
           frameborder="0"
           width="100%"
           style={{ flexGrow: 1 }}
         >
           Loading…
-        </iframe>
+        </iframe> */}
+        <Spreadsheet data={data} onChange={setData} className="mx-5" />
       </Stack>
 
       <Button
