@@ -26,6 +26,10 @@ export default function ProfilePage() {
     labels: ["Progress"], //label of this diagram
     };
 
+    function getRandomNumber() {
+      return Math.floor(Math.random() * 41) + 60;
+    }
+
   return (
     <section style={{ backgroundColor: '#eee' }}>
       <MDBContainer className="py-5">
@@ -53,18 +57,26 @@ export default function ProfilePage() {
                   className="rounded-circle"
                   style={{ width: '150px' }}
                   fluid />
-                <p className="text-muted mb-1">Lower Sixth</p>
-                <p className="text-muted mb-4">Bamenda, Cameroon</p>
+                <p className="text-muted mb-1">Arrey Ndang</p>
+                <p className="text-muted mb-4">Advanced Level</p>
                 <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Follow</MDBBtn>
-                  <MDBBtn outline className="ms-1">Message</MDBBtn>
+                  <MDBBtn outline className="ms-1">Log Out</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
 
             <MDBCard className="mb-4 mb-lg-0">
               <MDBCardBody className="p-0">
-                <Chart type="radialBar" series={series} options={options} />
+              <MDBCardText className="mb-4 h1">Trend</MDBCardText>
+                    <CalendarHeatmap
+                        startDate={new Date('2016-01-01')}
+                        endDate={new Date('2016-04-01')}
+                        values={[
+                            { date: '2016-01-01', count: 12 },
+                            { date: '2016-01-22', count: 122 },
+                            { date: '2016-01-30', count: 38 },
+                        ]}
+                    />
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
@@ -85,34 +97,34 @@ export default function ProfilePage() {
                     <MDBCardText>Email</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                    <MDBCardText className="text-muted">arreyndang@gmail.com</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Phone</MDBCardText>
+                    <MDBCardText>Level</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">(+237) 234-5678</MDBCardText>
+                    <MDBCardText className="text-muted">Advanced Level<i class="fa fa-level-down" aria-hidden="true"></i></MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>School</MDBCardText>
+                    <MDBCardText>Subjects</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Lycee Etoug Ebe</MDBCardText>
+                    <MDBCardText className="text-muted">Biology, Chemistry, Physics</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Address</MDBCardText>
+                    <MDBCardText>Date Joined</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">Melen, Yaounde</MDBCardText>
+                    <MDBCardText className="text-muted">Monday, May 15 2023</MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -122,30 +134,21 @@ export default function ProfilePage() {
               <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4">List of completed experiments</MDBCardText>
+                    <MDBCardText className="mb-4">Completed Biology Experiments</MDBCardText>
+                    <Chart type="radialBar" series={[getRandomNumber() - 50]} options={options} />
                     <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Lab 1</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 2</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 3</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 4</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 5</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
                   </MDBCardBody>
                 </MDBCard>
@@ -154,10 +157,11 @@ export default function ProfilePage() {
               <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4">List of completed experiments</MDBCardText>
+                    <MDBCardText className="mb-4">Completed Chemistry Experiments</MDBCardText>
+                    <Chart type="radialBar" series={[getRandomNumber() - 40]} options={options} />
                     <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Lab 1</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 2</MDBCardText>
@@ -167,39 +171,88 @@ export default function ProfilePage() {
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 3</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 4</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
 
                     <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 5</MDBCardText>
                     <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
                     </MDBProgress>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
-            </MDBRow>
-            <MDBRow>
-            <MDBCol md="12" className='my-5'>
+
+              <MDBCol md="6">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4 h1">Trend</MDBCardText>
-                    <CalendarHeatmap
-                        startDate={new Date('2016-01-01')}
-                        endDate={new Date('2016-04-01')}
-                        values={[
-                            { date: '2016-01-01', count: 12 },
-                            { date: '2016-01-22', count: 122 },
-                            { date: '2016-01-30', count: 38 },
-                        ]}
-                    />
+                    <MDBCardText className="mb-4">Completed Physics Experiments</MDBCardText>
+                    <Chart type="radialBar" series={[getRandomNumber() - 50]} options={options} />
+                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Lab 1</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 2</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 3</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 4</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 5</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
+
+              <MDBCol md="6">
+                <MDBCard className="mb-4 mb-md-0">
+                  <MDBCardBody>
+                    <MDBCardText className="mb-4">Favorite Experiments</MDBCardText>
+                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Lab 1</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 2</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 3</MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={getRandomNumber()} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 4</MDBCardText>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 5</MDBCardText>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 4</MDBCardText>
+
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Lab 5</MDBCardText>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+
+            <MDBRow>
+              
             </MDBRow>
           </MDBCol>
         </MDBRow>

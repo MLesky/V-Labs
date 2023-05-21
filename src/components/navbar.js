@@ -11,12 +11,21 @@ import {
   InputAdornment,
   IconButton,
   FormControl,
+  Drawer,
+  ListItem,
 } from "@mui/material";
-import { AccountCircle, VisibilityOff, Visibility } from "@mui/icons-material";
+import {
+  Menu,
+  Cancel,
+  CancelOutlined,
+  Home,
+  ExploreRounded,
+  School,
+} from "@mui/icons-material";
 import Logo from "../assets/logo/logo";
 import title from "../assets/title";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { LoginModal, CreateNewAccountModal } from "../auth";
 import RequestModal from "./requestModal";
 
@@ -44,9 +53,13 @@ const Navbar = () => {
   const handleSignupOpen = () => setSignupOpen(true);
   const handleSignupClose = () => setSignupOpen(false);
 
-  const [requestOpen, setRequestOpen] = useState(true);
+  const [requestOpen, setRequestOpen] = useState(false);
   const handleRequestOpen = () => setRequestOpen(true);
   const handleRequestClose = () => setRequestOpen(false);
+
+  const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const handleNavDrawerOpen = () => setNavDrawerOpen(true);
+  const handleNavDrawerClose = () => setNavDrawerOpen(false);
 
   const switchFromSignupToLogin = (event) => {
     handleSignupClose();
@@ -59,48 +72,69 @@ const Navbar = () => {
 
   return (
     <Box>
-      <AppBar position="sticky">
-        <Toolbar>
+      <AppBar position="sticky" sx={{}}>
+        <Toolbar sx={{ paddingLeft: "0px !important" }}>
           <Stack
+            sx={{ width: "100%" }}
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ width: "100%" }}
           >
-            <Stack direction="row" alignItems="center">
+            <div id="empty-box"></div>
+            <Stack direction="row" alignItems="center" justifyContent="start">
               <Logo />
               <Typography variant="h5" noWrap>
                 {title}
               </Typography>
             </Stack>
-            <Stack direction="row" alignItems="center">
-              <Link 
-                to={"/simulations"}
-                style={{
-                  color: "#FFF"
-                }}
-              >
-                <Button variant="outline" href="#">
-                  Simulations
+            <Box id="nav-links">
+              <Stack direction="row" alignItems="center">
+                <NavLink
+                  to={"/"}
+                  style={{
+                    color: "#FFF",
+                  }}
+                >
+                  <Button size="small" variant="outline">Home</Button>
+                </NavLink>
+                <NavLink
+                  to={"/simulations"}
+                  style={{
+                    color: "#FFF",
+                  }}
+                >
+                  <Button size="small" variant="outline">Simulations</Button>
+                </NavLink>
+                <NavLink
+                  to={"/teachings"}
+                  style={{
+                    color: "#FFF",
+                  }}
+                >
+                  <Button variant="outline">Teachings</Button>
+                </NavLink>
+                <Button size="small" variant="outline" onClick={handleRequestOpen}>
+                 Request
                 </Button>
-              </Link>
-              <Button variant="outline">Teachings</Button>
-              <Button variant="outline" onClick={handleRequestOpen}>
-                Make a Request
-              </Button>
-              {isAuth ? (
-                <Avatar sx={{ width: 50, height: 50 }}>{"ML"}</Avatar>
-              ) : (
-                <Stack direction="row">
-                  <Button variant="outline" onClick={handleLoginOpen}>
-                    Login
-                  </Button>
-                  <Button variant="outline" onClick={handleSignupOpen}>
-                    Create Account
-                  </Button>
-                </Stack>
-              )}
-            </Stack>
+                {isAuth ? (
+                  <NavLink to="/profile" style={{ textDecoration: "none" }}>
+                    <Avatar sx={{ width: 50, height: 50 }}>{"AN"}</Avatar>
+                  </NavLink>
+                ) : (
+                  <Stack direction="row" class="auth-btns">
+                    <Button size="small" variant="outline" onClick={handleLoginOpen}>
+                      Login
+                    </Button>
+                    <Button size="small" variant="outline" onClick={handleSignupOpen}>
+                      Create Account
+                    </Button>
+                  </Stack>
+                )}
+              </Stack>
+            </Box>
+            <IconButton id="menu-btn">
+              <Menu sx={{ color: "white" }} onClick={handleNavDrawerOpen} />
+            </IconButton>
           </Stack>
         </Toolbar>
       </AppBar>
@@ -124,6 +158,81 @@ const Navbar = () => {
         onCloseModal={handleRequestClose}
         isAuth={isAuth}
       />
+      <Drawer
+        class="side-drawer"
+        open={navDrawerOpen}
+        onClose={handleNavDrawerClose}
+        anchor={"right"}
+      >
+        <Box class="drawer-content">
+          <Stack direction="row" m={1}>
+            <></>
+            <IconButton color="primary" onClick={handleNavDrawerClose}>
+              <CancelOutlined fontSize="large" />
+            </IconButton>
+          </Stack>
+          <Stack direction="column" mt={5}>
+            <NavLink to="/" style={{ textDecoration: "none", width: "100%" }}>
+              <Button sx={{ width: "100%" }} onClick={handleNavDrawerClose} startIcon={<Home />}>
+                Home
+              </Button>
+            </NavLink>
+            <NavLink
+              to="/simulations"
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <Button sx={{ width: "100%" }} onClick={handleNavDrawerClose} startIcon={<ExploreRounded />}>
+                Simulations
+              </Button>
+            </NavLink>
+            <NavLink
+              to="/teachings"
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <Button sx={{ width: "100%" }} onClick={handleNavDrawerClose} startIcon={<School />}>
+                Teachings
+              </Button>
+            </NavLink>
+            <Button
+              onClick={() => {
+                handleNavDrawerClose();
+                handleRequestOpen();
+              }}
+            >
+              Make a Request
+            </Button>
+            {isAuth ? (
+              <NavLink
+                to="/profile"
+                style={{ textDecoration: "none", width: "100%" }}
+              >
+                <Button sx={{ width: "100%" }} onClick={handleNavDrawerClose}>
+                  Profile
+                </Button>
+              </NavLink>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    handleNavDrawerClose();
+                    handleLoginOpen();
+                  }}
+                >
+                  Log In
+                </Button>
+                <Button
+                  onClick={() => {
+                    handleNavDrawerClose();
+                    handleSignupOpen();
+                  }}
+                >
+                  Create New Account
+                </Button>
+              </>
+            )}
+          </Stack>
+        </Box>
+      </Drawer>
     </Box>
   );
 };

@@ -41,10 +41,63 @@ body {
   transform: translate(-50%, -50%);
   width: 400px;
   height: fit-content;
+  max-height: 700px;
   overflow-y: auto;
   background-color: white;
   outline: 4px solid #2196f3;
   box-shadow: 24;
   padding: 20px 40px;
   border-radius: 10px;
+}
+
+#menu-btn {
+  display: none;
+}
+
+/* drawer */
+.drawer-content {
+  width: 100vw;
+  max-width: 400px;
+}
+
+.drawer-content .active {
+  background-color: #257dc47e;
+}
+
+#nav-links .active {
+  background-color: #ffffff50;
+}
+
+#empty-box {
+  display: none;
+}
+
+#nav-links button{
+  text-transform: capitalize !important;
+}
+
+@media screen and (max-width: 800px)  {
+  /* navbar */
+  #empty-box {
+    display: block;
+  }
+  
+    #nav-links {
+      display: none;
+  }
+
+  #menu-btn {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .dialog-modal .modal-body {
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
