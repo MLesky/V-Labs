@@ -9,6 +9,8 @@ export default function CheckboxListSecondary() {
     {image : '', title : 'Build a Nucleus', Description : ''},
     {image : '', title : 'Density', Description : 'Meauring Densities of Objects'},
     {image : '', title : 'Vector Addition', Description : ''},
+    {image : '', title : 'Circuit Construction Kit: AC', Description : '', url:"https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_en.html"},
+    {image : '', title : 'Normal Modes', Description : '', url:"https://phet.colorado.edu/sims/html/normal-modes/latest/normal-modes_en.html"}
   ]
 
   return (
@@ -35,7 +37,7 @@ export default function CheckboxListSecondary() {
             description = {"Math lab for graphing"}
         />
 
-        {experiments.map((exp) => <CardI image={IMAGES.physics} title={exp.title} description={exp.description}/>)}
+        {experiments.map((exp) => <ExpCard image={IMAGES.physics} title={exp.title} description={exp.description} url={exp.url}/>)}
     </div>
   </Stack>
   );
