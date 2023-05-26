@@ -1,15 +1,27 @@
-import { useState, React } from "react";
+import { useState, React, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Stack, Button, IconButton, Box } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import IframeRenderer from "../components/IframeRenderer"
+// import { useIsIFrameLoaded } from "../hooks/iframeIsLoaded"
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Spreadsheet from "react-spreadsheet";
 
-const Experiment = () => {
+const Experiment = ({ hideLoader }) => {
   const location = useLocation();
   const [smallFormWidth, setSmallFormWidth] = useState("0");
   const [largeFormWidth, setLargeFormWidth] = useState("0");
   const [isOpen, setIsOpen] = useState(false);
+  const [isIFrameLoaded, setIsIFrameLoaded] = useState(false)
+
+  // const iframeRef = useRef(null);
+  // const isIFrameLoaded = useIsIFrameLoaded(iframeRef);
+
+  const handleLoad = () => {
+    setIsIFrameLoaded(!isIFrameLoaded)
+    console.log("loaded")
+  }
 
   const [data, setData] = useState([
     [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
@@ -46,18 +58,26 @@ const Experiment = () => {
          marginRight: {
             small: smallFormWidth,
             large: largeFormWidth,
-         } }}>
-      <iframe
-        id="exp-frame"
-        src={location.state.url}
-        allowfullscreen
-        style={{
-            width: '100%',
-            height: '100%',
+         },
+         display: "flex",
+         justifyContent: "center",
+         alignItems: "center"
         }}
-      >
-        Loading…
-      </iframe>
+         
+        >
+          <IframeRenderer isIFrameLoaded={isIFrameLoaded} handleLoad={handleLoad}  landingPageHtml={location.state.url}/>
+          {!isIFrameLoaded && <CircularProgress handleLoad={handleLoad} style={{alignSelf: "center"}} />}
+        {/* <iframe
+          id="exp-frame"
+          src={location.state.url}
+          allowfullscreen
+          style={{
+              width: '100%',
+              height: '100%',
+          }}
+        >
+          Loading…
+        </iframe> */}
       </Box>
 
       <Stack
