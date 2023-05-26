@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ExpCard, CardI, SideBar } from '../components';
 import { IMAGES } from '../utils';
 import { Stack } from '@mui/material';
-export default function CheckboxListSecondary() {
+
+export default function Physics() {
 
   const experiments = [
     {image : '', title : 'Geometric Options: Basics', Description : 'The Basics if Lenses'},

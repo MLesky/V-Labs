@@ -4,7 +4,7 @@ import { IMAGES } from '../utils';
 import { Stack } from '@mui/material';
 
 
-export default function CheckboxListSecondary() {
+export default function Biology() {
 
   const experiments = [
     {image : '', title : 'Natural Selection: Basics', Description : 'The Basics if Selection'},

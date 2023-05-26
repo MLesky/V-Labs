@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
   // Form Submition
@@ -31,6 +32,11 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
         onSubmit={handleFormSubmit}
       >
         <Stack spacing={2}>
+          {isAuth && <Link to='./requests'>
+            <Typography variant="h6" align="center" onClick={onCloseModal}>
+            View All Requests
+          </Typography>
+          </Link>}
           <Typography variant="h5" align="center">
             Request For An Experiment
           </Typography>
