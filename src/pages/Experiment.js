@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Stack, Button, IconButton, Box } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import IframeRenderer from "../components/IframeRenderer"
-import { useIsIFrameLoaded } from "../hooks/iframeIsLoaded"
+// import { useIsIFrameLoaded } from "../hooks/iframeIsLoaded"
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Spreadsheet from "react-spreadsheet";
