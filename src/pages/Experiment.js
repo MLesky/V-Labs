@@ -5,6 +5,7 @@ import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import IframeRenderer from "../components/IframeRenderer"
 // import { useIsIFrameLoaded } from "../hooks/iframeIsLoaded"
 import CircularProgress from '@mui/material/CircularProgress';
+import { area } from "../utils";
 
 import Spreadsheet from "react-spreadsheet";
 
@@ -19,22 +20,20 @@ const Experiment = ({ hideLoader }) => {
   // const isIFrameLoaded = useIsIFrameLoaded(iframeRef);
 
   const handleLoad = () => {
-    setIsIFrameLoaded(!isIFrameLoaded)
+
+    setTimeout(() => setIsIFrameLoaded(!isIFrameLoaded), 2000);
     console.log("loaded")
   }
 
-  const [data, setData] = useState([
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-    [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
-  ]);
+  function wasteTime(){
+    return(
+      <>
+        <CircularProgress />
+      </>
+    )
+    }
+
+  const [data, setData] = useState(area);
 
   const handleOpenForm = () => {
     if (isOpen) {

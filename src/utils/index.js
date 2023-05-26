@@ -1,7 +1,9 @@
 import IMAGES from "./images"
-import Subjects from "./subjects"
+import {subjects, area} from "./subjects"
+
 
 export {
     IMAGES,
-    Subjects,
+    subjects,
+    area
 }

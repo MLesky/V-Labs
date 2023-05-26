@@ -8,6 +8,19 @@ const subjects = [
     { name: "Maths", image: images.maths, goto: '/simulations/maths' },
     { name: "Computer Science", image: images.computer, goto: '/simulations/computer-science' },
     { name: "Food Science", image: images.food, goto: '/simulations/food-science' },
-  ];
+];
 
-export default subjects;
+const area = [
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+]
+
+export { subjects, area };

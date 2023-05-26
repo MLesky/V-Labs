@@ -4,7 +4,7 @@ import scienceLab from "../assets/images/medical-laboratory.jpg";
 import { Footer } from "../components";
 import blackStudents from "../assets/images/study-group-african-people.jpg";
 import { LoginModal, CreateNewAccountModal } from "../auth";
-import { Subjects } from "../utils";
+import { subjects } from "../utils";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -189,7 +189,7 @@ function HomePage() {
         }}
         borderColor="primary"
       >
-        {Subjects.map((subject) => (
+        {subjects.map((subject) => (
           <Button
             sx={{
               borderRadius: "50%",

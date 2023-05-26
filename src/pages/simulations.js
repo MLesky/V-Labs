@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import CardI from '../components/Card'
 import { Link } from 'react-router-dom';
 
-import { IMAGES, Subjects } from '../utils';
+import { IMAGES, subjects } from '../utils';
 import { Box } from '@mui/material';
 
 const Simulations = () => {
@@ -20,7 +20,7 @@ const Simulations = () => {
                         marginTop: "5em"
                     }}>
                     {
-                        Subjects.map(subject => (
+                        subjects.map(subject => (
                             <Link to={subject.goto} style={{
                                 textDecoration: "none"
                             }}>
