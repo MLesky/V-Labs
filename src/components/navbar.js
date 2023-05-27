@@ -29,6 +29,8 @@ import { Link, NavLink } from "react-router-dom";
 import { LoginModal, CreateNewAccountModal } from "../auth";
 import RequestModal from "./requestModal";
 
+import { useFirebaseAuth } from "../firebaseConfig/FirebaseAuthContext";
+
 const style = {
   position: "fixed",
   top: "50%",
@@ -44,6 +46,8 @@ const style = {
 };
 
 const Navbar = () => {
+  const user = useFirebaseAuth()
+
   const [isAuth, setIsAuth] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
@@ -201,7 +205,7 @@ const Navbar = () => {
             >
               Make a Request
             </Button>
-            {isAuth ? (
+            {user ? (
               <NavLink
                 to="/profile"
                 style={{ textDecoration: "none", width: "100%" }}
