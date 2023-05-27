@@ -1,6 +1,6 @@
 import { useState, React, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Stack, Button, IconButton, Box } from "@mui/material";
+import { Stack, Button, IconButton, Box, Skeleton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import IframeRenderer from "../components/IframeRenderer"
 // import { useIsIFrameLoaded } from "../hooks/iframeIsLoaded"
@@ -8,19 +8,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { area } from "../utils";
 
 import Spreadsheet from "react-spreadsheet";
+import { grey } from "@mui/material/colors";
 
 const Experiment = ({ hideLoader }) => {
   const location = useLocation();
   const [smallFormWidth, setSmallFormWidth] = useState("0");
   const [largeFormWidth, setLargeFormWidth] = useState("0");
   const [isOpen, setIsOpen] = useState(false);
-  const [isIFrameLoaded, setIsIFrameLoaded] = useState(false)
+  const [isIFrameLoaded, setIsIFrameLoaded] = useState(false);
 
   // const iframeRef = useRef(null);
   // const isIFrameLoaded = useIsIFrameLoaded(iframeRef);
 
   const handleLoad = () => {
-
     setTimeout(() => setIsIFrameLoaded(!isIFrameLoaded), 2000);
     console.log("loaded")
   }
@@ -53,19 +53,95 @@ const Experiment = ({ hideLoader }) => {
       justifyContent="space-between"
       sx={{ height: "calc(100vh - 60px)", width: "100vw" }}
     >
-        <Box sx={{ transition: "0.5s", flexGrow: 1,
-         marginRight: {
+      <Box
+        sx={{
+          transition: "0.5s",
+          backgroundColor: "#121212",
+          flexGrow: 1,
+          marginRight: {
             small: smallFormWidth,
             large: largeFormWidth,
-         },
-         display: "flex",
-         justifyContent: "center",
-         alignItems: "center"
+          },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-         
-        >
-          <IframeRenderer isIFrameLoaded={isIFrameLoaded} handleLoad={handleLoad}  landingPageHtml={location.state.url}/>
-          {!isIFrameLoaded && <CircularProgress handleLoad={handleLoad} style={{alignSelf: "center"}} />}
+      >
+        <IframeRenderer isIFrameLoaded={isIFrameLoaded} handleLoad={handleLoad}  landingPageHtml={location.state.url}/>
+        {
+          !isIFrameLoaded &&
+          <Stack
+            sx={{
+              height: "100%",
+              width: "100%",
+              padding: 3,
+              flexDirection: {
+                large: "row",
+                small: "column",
+              },
+            }}
+          >
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              sx={{
+                bgcolor: grey[900],
+                height: {
+                  large: "100%",
+                  small: "50%",
+                },
+                width: {
+                  large: "50%",
+                  width: "100%",
+                },
+                marginRight: {
+                  large: 1,
+                  small: 0,
+                },
+                marginBottom: {
+                  large: 0,
+                  small: 1,
+                },
+              }}
+            />
+            <Stack
+              spacing={2}
+              sx={{
+                width: {
+                  large: "50%",
+                  small: "100%",
+                },
+                height: {
+                  large: "100%",
+                  small: "50%",
+                },
+                marginLeft: {
+                  large: 1,
+                  small: 0,
+                },
+                marginTop: {
+                  large: 0,
+                  small: 1,
+                },
+              }}
+            >
+              <Skeleton
+                animation="wave"
+                variant="rectangular"
+                height="50%"
+                width="100%"
+                sx={{ bgcolor: grey[900] }}
+              />
+              <Skeleton
+                animation="wave"
+                variant="rectangular"
+                height="50%"
+                width="100%"
+                sx={{ bgcolor: grey[900] }}
+              />
+            </Stack>
+          </Stack>
+        }
         {/* <iframe
           id="exp-frame"
           src={location.state.url}
@@ -90,7 +166,7 @@ const Experiment = ({ hideLoader }) => {
           },
           zIndex: 1,
           height: "inherit",
-          transition: "0.5s"
+          transition: "0.5s",
         }}
       >
         <Box sx={{ backgroundColor: "white" }}>
@@ -115,7 +191,7 @@ const Experiment = ({ hideLoader }) => {
         startIcon={<ArrowBackIos />}
         onClick={handleOpenForm}
         sx={{
-            display: isOpen ? 'none' : 'block',
+          display: isOpen ? "none" : "block",
         }}
       ></Button>
     </Stack>
