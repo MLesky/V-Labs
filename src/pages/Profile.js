@@ -19,12 +19,22 @@ import {
 import Chart from "react-apexcharts";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
+import { getAuth, signOut } from "@firebase/auth";
 
 export default function ProfilePage() {
   const series = [70]; //70 percent
   const options = {
     labels: ["Progress"], //label of this diagram
   };
+
+  const handleLogout = (e) => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      console.log("Logged Out");
+    }).catch((error) => {
+      console.log('An Error occured');
+    })
+  }
 
   const subjects = [
     {
@@ -158,8 +168,7 @@ export default function ProfilePage() {
                 <p className="text-muted mb-1">Arrey Ndang</p>
                 <p className="text-muted mb-4">Advanced Level</p>
                 <div className="d-flex justify-content-center mb-2">
-                  <MDBBtn>Follow</MDBBtn>
-                  <MDBBtn outline className="ms-1">Message</MDBBtn>
+                  <MDBBtn outline className="ms-1" onClick={handleLogout}>Log Out</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
