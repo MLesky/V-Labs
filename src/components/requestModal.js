@@ -97,6 +97,7 @@ const RequestModal = ({ openModal, onCloseModal }) => {
           dateRequested: Timestamp.fromDate(new Date()),
           ...request,
           email : user != null ? user.email : request.email,
+          status: 'pending',
         });
 
         setUploadState({

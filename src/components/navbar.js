@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 import Logo from "../assets/logo/logo";
 import title from "../assets/title";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { LoginModal, CreateNewAccountModal } from "../auth";
 import RequestModal from "./requestModal";
@@ -46,7 +46,13 @@ const style = {
 };
 
 const Navbar = () => {
-  const user = useFirebaseAuth()
+  const user = useFirebaseAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 2000);
+    console.log("Has being set")
+  }, [user]);
 
   const [loginOpen, setLoginOpen] = useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
@@ -77,7 +83,7 @@ const Navbar = () => {
     <Box>
       <AppBar position="sticky" sx={{}}>
         <Toolbar sx={{ paddingLeft: "0px !important" }}>
-          <Stack
+        {!isLoading && <Stack
             sx={{ width: "100%" }}
             direction="row"
             justifyContent="space-between"
@@ -138,7 +144,7 @@ const Navbar = () => {
             <IconButton id="menu-btn">
               <Menu sx={{ color: "white" }} onClick={handleNavDrawerOpen} />
             </IconButton>
-          </Stack>
+          </Stack>}
         </Toolbar>
       </AppBar>
 
