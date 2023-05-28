@@ -48,7 +48,6 @@ const style = {
 const Navbar = () => {
   const user = useFirebaseAuth()
 
-  const [isAuth, setIsAuth] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
   const handleLoginClose = () => setLoginOpen(false);
@@ -120,7 +119,7 @@ const Navbar = () => {
                 <Button size="small" variant="outline" onClick={handleRequestOpen}>
                  Request
                 </Button>
-                {isAuth ? (
+                {user ? (
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
                     <Avatar sx={{ width: 50, height: 50 }}>{"AN"}</Avatar>
                   </NavLink>
@@ -146,21 +145,18 @@ const Navbar = () => {
       <LoginModal
         openModal={loginOpen}
         onCloseModal={handleLoginClose}
-        setIsAuth={setIsAuth}
         switchToSignUp={switchFromLoginToSignup}
       />
 
       <CreateNewAccountModal
         openModal={signupOpen}
         onCloseModal={handleSignupClose}
-        setIsAuth={setIsAuth}
         switchToLogin={switchFromSignupToLogin}
       />
 
       <RequestModal
         openModal={requestOpen}
         onCloseModal={handleRequestClose}
-        isAuth={isAuth}
       />
       <Drawer
         class="side-drawer"

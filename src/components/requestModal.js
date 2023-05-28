@@ -19,11 +19,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { database } from "../firebaseConfig/firebase";
 import { green } from "@mui/material/colors";
+import { useFirebaseAuth } from "../firebaseConfig/FirebaseAuthContext";
 
 const errorText = '<span class="notranslate">​</span>';
 
-const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
-  const user = "Anonymous";
+const RequestModal = ({ openModal, onCloseModal }) => {
+  const user = useFirebaseAuth();
   const [request, setRequest] = useState({
     message: "",
     subject: "",
@@ -92,9 +93,10 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
       try {
         setUploadState({ ...uploadState, loading: true });
         const docRef = await addDoc(collection(database, "requests"), {
-          userID: user,
+          userID: user != null ? user.uid : 'Anonymous',
           dateRequested: Timestamp.fromDate(new Date()),
           ...request,
+          email : user != null ? user.email : request.email,
         });
 
         setUploadState({
@@ -134,7 +136,7 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
         noValidate
       >
         <Stack spacing={2}>
-          {isAuth && (
+          {user && (
             <Link to="./requests">
               <Typography variant="h6" align="center" onClick={onCloseModal}>
                 View All Requests
@@ -177,10 +179,7 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
             error={errors.messageHasError}
             onChange={handleMessageChange}
           />
-
-          {!isAuth && (
-            <>
-              <TextField
+          <TextField
                 id="request-level"
                 label="Select Academic Level"
                 variant="standard"
@@ -195,6 +194,8 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
                 <MenuItem value="advance">Advanced Level</MenuItem>
                 <MenuItem value="higher">Higher</MenuItem>
               </TextField>
+
+          {!user && (
               <TextField
                 id="request-email"
                 label="Enter Email"
@@ -204,7 +205,6 @@ const RequestModal = ({ openModal, onCloseModal, isAuth }) => {
                 value={request.email}
                 onChange={handleEmailChange}
               />
-            </>
           )}
 
           {uploadState.loading ? <LinearProgress /> : <Typography

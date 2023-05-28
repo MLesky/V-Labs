@@ -15,7 +15,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseConfig } from "../firebaseConfig/firebase"
 
-const LoginModal = ({ openModal, onCloseModal, switchToSignUp, setIsAuth }) => {
+const LoginModal = ({ openModal, onCloseModal, switchToSignUp }) => {
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -35,7 +35,6 @@ const LoginModal = ({ openModal, onCloseModal, switchToSignUp, setIsAuth }) => {
         const auth = getAuth();
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        setIsAuth(true);
         setLoginError("");
         onCloseModal();
       }

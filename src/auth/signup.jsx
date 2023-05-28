@@ -26,7 +26,6 @@ const CreateNewAccountModal = ({
   openModal,
   onCloseModal,
   switchToLogin,
-  setIsAuth,
 }) => {
   const [userInfo, setUserInfo] = useState({
     firstName: "",
@@ -169,7 +168,6 @@ const CreateNewAccountModal = ({
         console.log("User :", userRef);
         console.log("User created:", user.uid);
         setRegisterError('');
-        setIsAuth(true);
         onCloseModal();
       } catch (error) {
         console.error(error);
