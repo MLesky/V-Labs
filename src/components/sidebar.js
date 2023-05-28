@@ -12,6 +12,7 @@ import {
   InputAdornment,
   IconButton,
   Drawer,
+  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -31,13 +32,12 @@ const [sideBarOpen, setSideBarOpen] = useState(false);
   const handleSideBarClose = () => setSideBarOpen(false);
 
     const getList = () => (
-        <List>
-        <ListItem>
-          <Typography variant="h6">Experiments From Manual</Typography>
-        </ListItem>
+        <List sx={{paddingX: 1, height: '100vh'}}>
+        <Typography variant="h5" textAlign="center" sx={{marginY: 2, fontWeight: 'bold'}}>Experiments</Typography>
         <Box sx={{ marginX: 2 }}>
           <TextField 
             fullWidth 
+            variant="outlined"
             placeholder="Search..."
             InputProps={{
                 endAdornment: (
@@ -53,16 +53,18 @@ const [sideBarOpen, setSideBarOpen] = useState(false);
         </Box>
         {experiments.map((exp) => (
           <NavLink to={`${exp}`} style={{ textDecoration: "none" }}>
+            <Paper sx={{marginTop: 1}}>
             <ListItem>
               <ListItemButton>
                 <ListItemText id="">
                   <Typography
-                    className="title-text"
-                    color="primary"
+                    color="primary.dark"
+                    variant='h6'
                     sx={{
                       textOverflow: "ellipsis",
                       overflow: "hidden",
                       whiteSpace: "nowrap",
+                      fontWeight: 'bold'
                     }}
                   >
                     {exp}
@@ -70,7 +72,8 @@ const [sideBarOpen, setSideBarOpen] = useState(false);
                 </ListItemText>
               </ListItemButton>
             </ListItem>
-            <Divider component="li" />
+            </Paper>
+            
           </NavLink>
         ))}
       </List>
