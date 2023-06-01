@@ -24,6 +24,7 @@ import "react-calendar-heatmap/dist/styles.css";
 import { getAuth, signOut } from "@firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { Skeleton, Box, Stack, Popover, Typography } from "@mui/material";
 
 
 export default function ProfilePage() {
@@ -31,6 +32,11 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const user = useFirebaseAuth();
   const navigate = useNavigate();
+  const [popper, setPopper] = useState({
+    isOpen: false,
+    message: '', 
+  });
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     // Fetch user data from the database
@@ -45,14 +51,17 @@ export default function ProfilePage() {
 
         if (userDoc.exists()) {
           // If the user document exists, set the userData state with its data
+          setLoading(false)
           setUserData(userDoc.data());
         } else {
+          setUserData(null);
+          setPopper({message: "Error Fetching data", isOpen: true});
           console.log("User document not found");
         }
       } catch (error) {
         console.log("Error fetching user data:", error);
       } finally {
-        setLoading(false);
+        
       }
     };
 
@@ -76,20 +85,94 @@ export default function ProfilePage() {
     });
   };
 
-  
   if (loading) {
     // Loading user data, show a loading spinner or message
-    return <div>Loading...</div>;
-  }
+    return <>
+      <Box sx={{paddingX: 2, paddingY: 5, maxWidth: 1175, marginX: 'auto'}}>
+      <Skeleton height={90} width='100%' />
+      <Stack sx={{
+        flexDirection: {
+          large: 'row',
+          small: 'column'
+        },
+        justifyContent: {
+          large: "space-between",
+          small: 'center',
+        }
+      }}>
+        <Stack spacing={-6} sx={{
+          width: {
+            large: '30%',
+            small: '100%',
+          },
+        }}>
+          <Stack alignItems='center' spacing={1}>
+            <Skeleton variant="circular" width={150} height={150} sx={{marginTop: 5}}/>
+            <Skeleton variant='text' width={120} sx={{fontSize: '1em'}}/>
+            <Skeleton variant='text' width={200} sx={{fontSize: '1em'}}/>
+            <Skeleton width={100} height={70}/>
+          </Stack>
+          <Stack alignItems='center' spacing={1}>
+            <Skeleton width={300} height={400}/>
+          </Stack>
+        </Stack>
 
-  if (!user) {
-    // User is not authenticated, redirect to login page or show a message
-    return <div></div>;
-  }
+        <Stack spacing={-14} sx={{
+          width: {
+            large: '65%',
+            small: '100%',
+          },
+          marginTop: 2,
+        }}>
+          <Stack  spacing={-1}>
+          <Skeleton height={70} />
+          <Skeleton height={70} />
+          <Skeleton height={70} />
+          <Skeleton height={70} />
+          <Skeleton height={70} />
+          </Stack>
 
-  if (!userData) {
-    // User data not found, show an error message
-    return <div>User data not found</div>;
+          <Stack flexWrap='wrap' direction="row" sx={{
+                        justifyContent: 'center',
+                        alignItems: 'center'
+          }}>
+            <Skeleton height={700} width={310} sx={{marginX: 3}}/>
+            <Skeleton height={700} width={310} sx={{
+              display: {
+                large: 'block',
+                small: 'none',
+              },
+              marginX: 3,
+            }}/>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Box>;
+
+    { count == 1 ?
+      setTimeout(() => {
+        if(!userData){
+          setPopper({message: "Error Fetching data", isOpen: true})
+        } else if(!user){
+         setPopper({message: "Please login or create account to view profile", isOpen: true})
+        } else {
+          setPopper({message: '', isOpen: false});
+        }
+        setCount(count+1)
+        console.log("Count is", count)
+      }, 4000) : null }
+
+    <Popover
+      open={popper.isOpen}
+      onClose={() => setPopper({isOpen: false, message: ''})}
+      anchorReference="anchorPosition"
+      anchorPosition={{top: 65, left: 20}}
+      anchorOrigin={{vertical: 'top', horizonatal: 'center'}}
+      transformOrigin={{vertical: 'top', horizonatal: 'center'}}
+    >
+      <Typography color='error' fontWeight='bold' paddingX={2} paddingY={1}>{popper.message}</Typography>
+    </Popover>
+    </>
   }
   
   const subjects = [
@@ -195,7 +278,7 @@ export default function ProfilePage() {
 
   return (
     <section style={{ backgroundColor: "#eee" }}>
-      <MDBContainer className="py-5">
+      {userData && <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol>
             <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
@@ -211,7 +294,7 @@ export default function ProfilePage() {
         </MDBRow>
 
         <MDBRow>
-          <MDBCol lg="4">
+          <MDBCol lg="4" className="d-flex flex-column align-items-center">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
                 <MDBCardImage
@@ -308,7 +391,7 @@ export default function ProfilePage() {
             <MDBRow>
               {subjects.map((subject) => (
                 <MDBCol md="6">
-                  <MDBCard className="mb-4 mb-md-0">
+                  <MDBCard className="mb-4 mb-md-0 mx-auto">
                     <MDBCardBody>
                       <MDBCardText className="mb-4">
                         Completed {subject.subject} Experiments
@@ -343,7 +426,7 @@ export default function ProfilePage() {
               ))}
 
               <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
+                <MDBCard className="mb-4 mb-md-0 mx-auto">
                   <MDBCardBody>
                     <MDBCardText className="mb-4">
                       Favorite Experiments
@@ -373,7 +456,7 @@ export default function ProfilePage() {
             </MDBRow>
           </MDBCol>
         </MDBRow>
-      </MDBContainer>
+      </MDBContainer>}
     </section>
   );
 }
