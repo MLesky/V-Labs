@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useFirebaseAuth } from "../firebaseConfig/FirebaseAuthContext";
+
 import {
   MDBCol,
   MDBContainer,
@@ -20,8 +22,43 @@ import Chart from "react-apexcharts";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { getAuth, signOut } from "@firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+
 
 export default function ProfilePage() {
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const user = useFirebaseAuth();
+
+  useEffect(() => {
+    // Fetch user data from the database
+    const fetchUserData = async () => {
+      try {
+        // Access the Firestore instance
+        const db = getFirestore();
+
+        // Get the user document from the "users" collection using the user UID
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+          // If the user document exists, set the userData state with its data
+          setUserData(userDoc.data());
+        } else {
+          console.log("User document not found");
+        }
+      } catch (error) {
+        console.log("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user) {
+      fetchUserData();
+    }
+  }, [user]);
+
   const series = [70]; //70 percent
   const options = {
     labels: ["Progress"], //label of this diagram
@@ -32,10 +69,25 @@ export default function ProfilePage() {
     signOut(auth).then(() => {
       console.log("Logged Out");
     }).catch((error) => {
-      console.log('An Error occured');
-    })
+      console.log('An Error occured', error);
+    });
+  };
+
+  if (!user) {
+    // User is not authenticated, redirect to login page or show a message
+    return <div>Please login to view the profile</div>;
   }
 
+  if (loading) {
+    // Loading user data, show a loading spinner or message
+    return <div>Loading...</div>;
+  }
+
+  if (!userData) {
+    // User data not found, show an error message
+    return <div>User data not found</div>;
+  }
+  
   const subjects = [
     {
       subject: "Biology",
@@ -165,8 +217,8 @@ export default function ProfilePage() {
                   style={{ width: "150px" }}
                   fluid
                 />
-                <p className="text-muted mb-1">Arrey Ndang</p>
-                <p className="text-muted mb-4">Advanced Level</p>
+                <p className="text-muted mb-1">{userData.firstName} {userData.secondName}</p>
+                <p className="text-muted mb-4">{userData.email}</p>
                 <div className="d-flex justify-content-center mb-2">
                   <MDBBtn outline className="ms-1" onClick={handleLogout}>Log Out</MDBBtn>
                 </div>
@@ -197,7 +249,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      Arrey Ndang
+                      {userData.firstName} {userData.secondName}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -208,7 +260,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      arreyndang@gmail.com
+                      {userData.email}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -219,7 +271,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      Advanced Level
+                      {userData.academicLevel}
                       <i class="fa fa-level-down" aria-hidden="true"></i>
                     </MDBCardText>
                   </MDBCol>
@@ -231,7 +283,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      Biology, Chemistry, Physics
+                      {userData && userData.subjects.join(", ")}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
