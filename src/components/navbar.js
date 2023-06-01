@@ -83,8 +83,7 @@ const Navbar = () => {
     <Box>
       <AppBar position="sticky" sx={{}}>
         <Toolbar sx={{ paddingLeft: "0px !important" }}>
-        {!isLoading && <Stack
-            sx={{ width: "100%" }}
+        <Stack sx={{ width: "100%" }}
             direction="row"
             justifyContent="space-between"
             alignItems="center"
@@ -96,6 +95,7 @@ const Navbar = () => {
                 {title}
               </Typography>
             </Stack>
+            {!isLoading && 
             <Box id="nav-links">
               <Stack direction="row" alignItems="center">
                 <NavLink
@@ -140,11 +140,11 @@ const Navbar = () => {
                   </Stack>
                 )}
               </Stack>
-            </Box>
+            </Box>}
             <IconButton id="menu-btn">
               <Menu sx={{ color: "white" }} onClick={handleNavDrawerOpen} />
             </IconButton>
-          </Stack>}
+          </Stack>
         </Toolbar>
       </AppBar>
 

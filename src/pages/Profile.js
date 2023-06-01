@@ -23,12 +23,14 @@ import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { getAuth, signOut } from "@firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ProfilePage() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const user = useFirebaseAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data from the database
@@ -67,20 +69,22 @@ export default function ProfilePage() {
   const handleLogout = (e) => {
     const auth = getAuth();
     signOut(auth).then(() => {
+      navigate('/');
       console.log("Logged Out");
     }).catch((error) => {
       console.log('An Error occured', error);
     });
   };
 
-  if (!user) {
-    // User is not authenticated, redirect to login page or show a message
-    return <div>Please login to view the profile</div>;
-  }
-
+  
   if (loading) {
     // Loading user data, show a loading spinner or message
     return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    // User is not authenticated, redirect to login page or show a message
+    return <div></div>;
   }
 
   if (!userData) {
@@ -218,7 +222,7 @@ export default function ProfilePage() {
                   fluid
                 />
                 <p className="text-muted mb-1">{userData.firstName} {userData.secondName}</p>
-                <p className="text-muted mb-4">{userData.email}</p>
+                <p className="text-muted mb-4">{user.email}</p>
                 <div className="d-flex justify-content-center mb-2">
                   <MDBBtn outline className="ms-1" onClick={handleLogout}>Log Out</MDBBtn>
                 </div>
@@ -260,7 +264,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {userData.email}
+                      {user.email}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -294,7 +298,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      Monday, May 15 2023
+                      {userData.dateJoined.toDate().toString().substring(0,15)}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>

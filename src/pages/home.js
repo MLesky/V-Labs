@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
 
-  const [isAuth, setIsAuth] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
   const handleLoginClose = () => setLoginOpen(false);
@@ -284,13 +283,11 @@ function HomePage() {
       <LoginModal
         openModal={loginOpen}
         onCloseModal={handleLoginClose}
-        setIsAuth={setIsAuth}
         switchToSignUp={switchFromLoginToSignup}
       />
       <CreateNewAccountModal
         openModal={signupOpen}
         onCloseModal={handleSignupClose}
-        setIsAuth={setIsAuth}
         switchToLogin={switchFromSignupToLogin}
       />
     </Stack>
