@@ -32,8 +32,8 @@ const [sideBarOpen, setSideBarOpen] = useState(false);
   const handleSideBarClose = () => setSideBarOpen(false);
 
     const getList = () => (
-        <List sx={{paddingX: 1, height: '100vh'}}>
-        <Typography variant="h5" textAlign="center" sx={{marginY: 2, fontWeight: 'bold'}}>Experiments</Typography>
+        <List sx={{paddingX: 1, height: '100%', overflow: "auto"}}>
+        <Typography textAlign="center" sx={{marginY: 2, fontWeight: 'bold'}}>Experiments</Typography>
         <Box sx={{ marginX: 2 }}>
           <TextField 
             fullWidth 
