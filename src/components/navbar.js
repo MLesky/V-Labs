@@ -127,7 +127,7 @@ const Navbar = () => {
                 </Button>
                 {user ? (
                   <NavLink to="/profile" style={{ textDecoration: "none" }}>
-                    <Avatar sx={{ width: 50, height: 50 }}>{"AN"}</Avatar>
+                    <Avatar sx={{ width: 50, height: 50 }} src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" />
                   </NavLink>
                 ) : (
                   <Stack direction="row" class="auth-btns">

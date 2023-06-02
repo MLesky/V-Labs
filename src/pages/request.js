@@ -1,4 +1,4 @@
-import { ArrowDownward, ArrowUpward, MonitorWeightSharp } from "@mui/icons-material";
+import { AllInclusive, ArrowDownward, ArrowUpward, Cancel, Check, MonitorWeightSharp, Pending, PendingActions, PendingSharp } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -97,15 +97,15 @@ const RequestPage = () => {
   }, [user]);
 
   const handleDeleteRequest = (requestId) => {
-     try {
+    try {
       const docRef = doc(database, 'requests', requestId);
       deleteDoc(docRef).then(() => {
         console.log(requestId, "deleted");
       });
-     } catch (err) {
-       console.log("An error occured:", err)
-     }
-   }
+    } catch (err) {
+      console.log("An error occured:", err)
+    }
+  }
 
   const handleShowAll = (e) => {
     setShowRequests(requests);
@@ -126,13 +126,13 @@ const RequestPage = () => {
   }
 
   const handleSortAscending = (e) => {
-    setShowRequests(showRequests.sort(function(a, b){
+    setShowRequests(showRequests.sort(function (a, b) {
       return a.dateRequested - b.dateRequested;
     }))
   }
 
   const handleSortDescending = (e) => {
-    setShowRequests(showRequests.sort(function(a, b){
+    setShowRequests(showRequests.sort(function (a, b) {
       return a.dateRequested - b.dateRequested;
     }).reverse())
   }
@@ -157,12 +157,12 @@ const RequestPage = () => {
               <Skeleton height={60} width={100} />
               <Skeleton height={60} width={60} />
             </Stack>
-            <Stack width='100%' alignItems='center' spacing={-20} sx={{marginTop: -10}}>
-            {[1,1].map(() => <Skeleton sx={{
-                  maxWidth: 800,
-                  width: '100%',
-                  height: 500,
-                }}/>)}
+            <Stack width='100%' alignItems='center' spacing={-20} sx={{ marginTop: -10 }}>
+              {[1, 1].map(() => <Skeleton sx={{
+                maxWidth: 800,
+                width: '100%',
+                height: 500,
+              }} />)}
             </Stack>
           </Stack>
         )}
@@ -178,14 +178,56 @@ const RequestPage = () => {
             <ButtonGroup
               width="fit-content"
               variant="contained"
-              sx={{ overFlow: "auto", marginY: 2}}
+              sx={{ overFlow: "auto", marginY: 2 }}
             >
-              <Button onClick={handleShowAll}>All</Button>
-              <Button onClick={handleShowPending}>Pending</Button>
-              <Button onClick={handleShowCompleted}>Completed</Button>
-              <Button onClick={handleShowDeclined}>Declined</Button>
-              <Button onClick={handleSortAscending}><ArrowUpward /></Button>
-              <Button onClick={handleSortDescending}><ArrowDownward /></Button>
+              <Button size="small" onClick={handleShowAll}>All</Button>
+              <Button size="small" onClick={handleShowPending}>
+                <Typography variant="caption" sx={{
+                  display: {
+                    large: 'block',
+                    small: 'none',
+                  }
+                }}>Pending
+                </Typography>
+                <Pending sx={{
+                  display: {
+                    large: 'none',
+                    small: 'block',
+                  }
+                }}/>
+              </Button>
+              <Button size="small" onClick={handleShowCompleted}>
+                <Typography variant="caption" sx={{
+                  display: {
+                    large: 'block',
+                    small: 'none',
+                  }
+                }}>Completed
+                </Typography>
+                <Check sx={{
+                  display: {
+                    large: 'none',
+                    small: 'block',
+                  }
+                }}/>
+              </Button>
+              <Button size="small" onClick={handleShowDeclined}>
+                <Typography variant="caption" sx={{
+                  display: {
+                    large: 'block',
+                    small: 'none',
+                  }
+                }}>Declined
+                </Typography>
+                <Cancel sx={{
+                  display: {
+                    large: 'none',
+                    small: 'block',
+                  }
+                }}/>
+              </Button>
+              <Button size="small" onClick={handleSortAscending}><ArrowUpward /></Button>
+              <Button size="small" onClick={handleSortDescending}><ArrowDownward /></Button>
             </ButtonGroup>
             <Stack
               direction="row"
@@ -204,7 +246,7 @@ const RequestPage = () => {
                   alignItems="center"
                   sx={{ height: "70vh", width: "100%" }}
                 >
-                  <img src={IMAGES.empty} alt="Empty" width={400}/>
+                  <img src={IMAGES.empty} alt="Empty" width={400} />
                   <Typography variant='h5'>You have no request</Typography>
                 </Stack>
               ) : (
@@ -265,8 +307,8 @@ const RequestPage = () => {
                                   request.status === "completed"
                                     ? green[500]
                                     : request.status === "declined"
-                                    ? "error"
-                                    : ""
+                                      ? "error"
+                                      : ""
                                 }
                               >
                                 {request.status}
