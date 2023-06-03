@@ -1,9 +1,11 @@
 import IMAGES from "./images"
-import {subjects, area} from "./subjects"
+import { subjects, areaDiffusion, areaDensity, areaState } from "./subjects"
 
 
 export {
     IMAGES,
     subjects,
-    area
+    areaDiffusion, 
+    areaDensity, 
+    areaState
 }

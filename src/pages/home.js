@@ -94,8 +94,8 @@ function HomePage() {
             variant="h6" 
             color="white">
             Teachers have access to simulation-specific tips and video primers,
-            resources for teaching with simulations, and activities shared by
-            our teacher community.
+            resources for teaching with simulations, and progress by
+            students and teachers.
           </Typography>
 
           <Typography sx={{ 
@@ -177,7 +177,7 @@ function HomePage() {
             padding: "20px",
           }}
         >
-          {"100 Simulations"}
+          {"Simulations For All"}
         </Typography>
       </Box>
       <Box
@@ -198,8 +198,8 @@ function HomePage() {
             <Stack
               sx={{
                 height: "150px",
-                width: "150px",
-                borderRadius: "50%",
+                width: "200px",
+                borderRadius: 5,
                 backgroundImage: `url(${subject.image})`,
                 backgroundBlendMode: "multiply",
                 backgroundColor: "rgba(0, 0, 0, 0.7)",

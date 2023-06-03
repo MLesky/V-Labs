@@ -10,8 +10,8 @@ const subjects = [
     { name: "Food Science", image: images.food, goto: '/simulations/food-science' },
 ];
 
-const area = [
-  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+const areaDensity = [
+  [{ value: "Material" }, { value: "Volume of water" }, { value: "Volume" }, { value: "Density" }, { value: "" }],
   [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
   [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
   [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
@@ -23,4 +23,30 @@ const area = [
   [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
 ]
 
-export { subjects, area };
+const areaDiffusion = [
+  [{ value: "No of Particles" }, { value: "Mass" }, { value: "Temperature" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+]
+
+const areaState = [
+  [{ value: "Molecules" }, { value: "State" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+  [{ value: "" }, { value: "" }, { value: "" }, { value: "" }, { value: "" }],
+]
+
+export { subjects, areaDiffusion, areaDensity, areaState };

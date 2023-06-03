@@ -275,7 +275,6 @@ export default function ProfilePage() {
   function getRandomNumber() {
     return Math.floor(Math.random() * 21) + 80;
   }
-
   return (
     <section style={{ backgroundColor: "#eee" }}>
       {userData && <MDBContainer className="py-5">
@@ -389,19 +388,20 @@ export default function ProfilePage() {
             </MDBCard>
 
             <MDBRow>
-              {subjects.map((subject) => (
+              {userData.subjects.map((subject) => (
                 <MDBCol md="6">
                   <MDBCard className="mb-4 mb-md-0 mx-auto">
                     <MDBCardBody>
                       <MDBCardText className="mb-4">
-                        Completed {subject.subject} Experiments
+                        Completed {subject} Experiments
                       </MDBCardText>
                       <Chart
                         type="radialBar"
                         series={[getRandomNumber() - 50]}
                         options={options}
                       />
-                      {subject.experiments.map((experiment) => (
+                      {
+                      (subject == 'Biology' ? subjects[0].experiments : subject === 'Chemistry' ? subjects[1].experiments : subjects[2].experiments).map((experiment) => (
                         <>
                           <MDBCardText
                             className="mb-1"

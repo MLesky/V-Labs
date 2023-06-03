@@ -16,7 +16,8 @@ const Maths = () => {
       style={{
         display: "flex",
         flexDirection: "row",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        justifyContent: 'center',
       }}
     >
       {/* https://phet.colorado.edu/sims/html/circuit-construction-kit-ac-virtual-lab/latest/circuit-construction-kit-ac-virtual-lab_en.html */}
